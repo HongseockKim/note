@@ -1,4 +1,4 @@
-# note
+# 🗒️note
 
 ## browser
 
