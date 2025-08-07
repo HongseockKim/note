@@ -17,13 +17,13 @@
 
 최상위 인터페이스로 `Node` 가 있음
 
-![node 하위 이미지](image.png)
+![node 하위 이미지](../images/image.png)
 
 [이미지 출처](https://web.stanford.edu/class/cs98si/slides/the-document-object-model.html)
 
  \* 웹페이지를 트리 구조의 객체들로 표현한 모델 도큐먼트 트리
 
-![alt text](image-1.png)
+![alt text](../images/image-1.png)
 
 ## 참고
 
