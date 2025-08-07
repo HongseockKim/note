@@ -43,7 +43,7 @@ const classAttr = divElement.getAttributeNode('class');
 // 컴포넌트
 // VirtualDOM 을 생성하는 팩토리
 function Component(){
-    retunr <div>Hello</div>;
+    return <div>Hello</div>;
 }
 
 // 실제로는 javascript 객체 트리
