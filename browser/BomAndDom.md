@@ -25,6 +25,39 @@
 
 ![alt text](../images/image-1.png)
 
+```javascript
+// Element Node (태그)
+const divElement = document.querySelector('div');
+
+// Text Node (텍스트 내용)
+const textNode = divElement.firstChild;
+
+// Attribute Node (속성)
+const classAttr = divElement.getAttributeNode('class');
+```
+
+## VirtualDom
+
+```javascript
+
+// 컴포넌트
+// VirtualDOM 을 생성하는 팩토리
+function Component(){
+    retunr <div>Hello</div>;
+}
+
+// 실제로는 javascript 객체 트리
+// Bom 의 사본 
+const virtureNode = {
+    type:'div',
+    props:{
+        children:'Hello'
+    },
+    key:null,
+    ref:null
+}
+```
+
 ## 참고
 
 - [Javascript.info, DOM 트리](https://ko.javascript.info/dom-nodes)
