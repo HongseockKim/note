@@ -1,3 +1,12 @@
 # note
 
-memo
+## browser
+
+- BOM
+- DOM
+
+## javascript
+
+## module
+
+- module
