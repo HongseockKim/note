@@ -1,10 +1,8 @@
 # CSR (Client-Side Rendering), SSR (Server-Side Rendering), SSG (Static Site Generation)
 
-
 ![CSR](../images/csr.png)
 ![alt text](../images/ssr.png)
 [이미지 출처](https://tech.weperson.com/wedev/frontend/csr-ssr-spa-mpa-pwa/#csr-client-side-rendering-vs-ssr-server-side-rendering)
-
 
 ## SPA / MPA
 
