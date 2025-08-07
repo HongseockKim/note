@@ -24,6 +24,50 @@
 
 exports 는 항상 module.exports 를 참조하기 때문에 exports 를 사용하면 직접 module.exports 를 수정하지 않고 객체의 멤버를 만들거나 수정하는 방식으로 사용한다. 따라서, exports 에 어떤 값을 할당하거나 새로운 객체를 할당했다고 하더라도 결국 require 는 module.exports 를 리턴받기 때문에 잠재적인 버그를 피할 수가 있다.
 
+require core
+
+```javascript
+const require = () => {
+    const module = {export:{}};
+    const exprots = module.export;
+
+    exprots.add = (a,b) => a + b;
+    exprots.multiply = (a,b) => a * b;
+
+    return module.export;
+}
+
+const modules = require();
+console.log(modules.add(2,3));
+
+
+function testRequire(path) {
+    const moduleCode = {
+        './math':`
+        exports.add = (a,b) => a + b;
+        exports.multiply = (a,b) => a * b;
+        `,
+        './string':`
+        module.exports = {
+        reverse: (str) => str.split('').reverse().join('')
+        };
+        `
+    };
+    
+    const module = {exports:{}};
+    const exports = module.exports;
+    const func = new Function('module','exports',moduleCode[path]);
+    func(module,exports);
+    return module.exports;
+}
+
+const math = testRequire('./math');
+const string = testRequire('./string');
+
+console.log(math.add(2,3));
+console.log(string.reverse('hello'));
+```
+
 ## AMD(Asynchronous Module Definition) 비동기 모듈
 
 CommonJS가 서버쪽에서 장점이 많은 반면에 AMD는 브라우저 쪽에서 더 큰 효과를 발휘한다. 브라우저에서는 모든 모듈이 다 로딩될 때까지 기다릴 수 없기 때문에 비동기 모듈 로딩방식으로 구현을 해놓았다. 이 방식에서 사용하는 함수는 `define()` 과 `require()` 이며 AMD 스펙을 가장 잘 구현한 모듈로더는 RequireJS 이다.
@@ -52,6 +96,24 @@ define(() => {
     printA: () => console.log('a')
   }
 });
+```
+
+```javascript
+// AMD defin
+const defin = (dependencies,factory) => {
+    const modules = {};
+    const loadedDeps = dependencies.map(dep=> modules[dep] || {});
+
+    const moduleExports = factory.apply(null,loadedDeps);
+    return moduleExports;
+}
+
+const mathModule =defin([],()=>{
+    return{
+        add:(a,b)=> a + b,
+        multiply:(a,b)=> a * b
+    };
+})
 ```
 
 ## UMD(Universal Module Definition) 범용 모듈
