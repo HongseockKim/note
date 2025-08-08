@@ -47,7 +47,7 @@ function Component(){
 }
 
 // 실제로는 javascript 객체 트리
-// Bom 의 사본 
+// Dom 의 사본 
 const virtureNode = {
     type:'div',
     props:{
@@ -56,6 +56,28 @@ const virtureNode = {
     key:null,
     ref:null
 }
+
+function Component() {
+  return <div>Hello</div>;
+}
+
+const virtualDom = Component();
+
+console.log(virtualDom);
+/**
+ * $$typeof:Symbol(react.transitional.element)
+* type:"div"
+* key:null
+* props:(1) {children: "Hello"}
+* _owner:null
+* ref:null
+* _store:{}
+* _debugInfo:null
+* _debugStack:"Error: react-stack-top-frame\n at exports.jsx (<anonymous>:1273:32)\n at Component (<anonymous>:10:52)\n at <anonymous>:15:18\n at mn (<anonymous>:16:5455)\n"
+* _debugTask:(1) {run: run()}
+* [[Prototype]]:{}
+ */ 
+
 ```
 
 ## 참고
