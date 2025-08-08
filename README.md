@@ -15,6 +15,10 @@
 
 - [CI & CD](https://github.com/HongseockKim/note/blob/main/build/CI-CD.md)
 
+## html
+  
+- [data- 속성](https://github.com/HongseockKim/note/blob/main/html/data.md)
+  
 ## javascript
 
 ## module
