@@ -1,5 +1,9 @@
 # 🗒️note
 
+## Animation
+
+- [CSS & javaScript](https://github.com/HongseockKim/note/blob/main/animation/animation.md)
+
 ## browser
 
 - [BOM](https://github.com/HongseockKim/note/blob/main/browser/BomAndDom.md)
