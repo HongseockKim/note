@@ -22,7 +22,11 @@
 - `exports` 는 `module.exports` 를 참조한다.
 - `require` 는 항상 `module.exports` 를 리턴받는다.
 
-exports 는 항상 module.exports 를 참조하기 때문에 exports 를 사용하면 직접 module.exports 를 수정하지 않고 객체의 멤버를 만들거나 수정하는 방식으로 사용한다. 따라서, exports 에 어떤 값을 할당하거나 새로운 객체를 할당했다고 하더라도 결국 require 는 module.exports 를 리턴받기 때문에 잠재적인 버그를 피할 수가 있다.
+exports 는 항상 module.exports 를 참조하기 때문에 exports 를 사용하면 직접 module.exports 를 수정하지 않고 객체의 멤버를 만들거나 수정하는 방식으로 사용한다. 따라서,
+
+exports 에 어떤 값을 할당하거나 새로운 객체를 할당했다고 하더라도
+
+**결국 require 는 module.exports 를 리턴받기 때문에 잠재적인 버그를 피할 수가 있다.**
 
 require core
 
