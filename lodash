@@ -1,0 +1,267 @@
+const arr = [1, 2, 3, 4, 5, 6];
+  const users = [
+      { id: 1, name: '김철수', age: 30, active: true },
+      { id: 2, name: '이영희', age: 25, active: false },
+      { id: 3, name: '박민수', age: 30, active: true }
+  ];
+
+  // 🔍 검색/찾기
+  _.find(users, { age: 30 });                    // 첫 번째 30살 찾기
+  _.findLast(users, { active: true });           // 마지막 active 찾기
+  _.findIndex(users, { name: '이영희' });         // 인덱스 찾기
+  _.findLastIndex(users, { active: true });      // 마지막 인덱스
+  _.indexOf(arr, 3);                             // 3의 인덱스
+  _.lastIndexOf([1,2,3,2,1], 2);                // 마지막 2의 인덱스
+
+  // ✂️ 분할/추출
+  _.chunk([1,2,3,4,5], 2);                      // [[1,2], [3,4], [5]]
+  _.drop(arr, 2);                                // [3,4,5,6] (앞 2개 제거)
+  _.dropRight(arr, 2);                           // [1,2,3,4] (뒤 2개 제거)
+  _.take(arr, 3);                                // [1,2,3] (앞 3개)
+  _.takeRight(arr, 3);                           // [4,5,6] (뒤 3개)
+  _.slice(arr, 1, 4);                            // [2,3,4]
+  _.initial(arr);                                // [1,2,3,4,5] (마지막 제외)
+  _.tail(arr);                                   // [2,3,4,5,6] (첫번째 제외)
+
+  // 🔀 배열 조작
+  _.compact([0, 1, false, 2, '', 3]);           // [1,2,3] (falsy 제거)
+  _.concat(arr, 7, [8,9]);                      // [1,2,3,4,5,6,7,8,9]
+  _.difference([1,2,3], [2,3,4]);               // [1] (차집합)
+  _.intersection([1,2,3], [2,3,4]);             // [2,3] (교집합)
+  _.union([1,2], [2,3], [3,4]);                 // [1,2,3,4] (합집합)
+  _.uniq([1,2,2,3,3,3]);                        // [1,2,3] (중복 제거)
+  _.uniqBy(users, 'age');                       // age 기준 중복 제거
+  _.pull([1,2,3,4], 2, 3);                      // [1,4] (원본 수정)
+  _.pullAll([1,2,3,4], [2,3]);                  // [1,4] (원본 수정)
+  _.remove(arr, n => n % 2 === 0);              // 짝수 제거 (원본 수정)
+
+  // 🔄 변환
+  _.flatten([1, [2, 3, [4]]]);                  // [1,2,3,[4]] (1단계 평탄화)
+  _.flattenDeep([1, [2, [3, [4]]]]);           // [1,2,3,4] (완전 평탄화)
+  _.flattenDepth([1, [2, [3, [4]]]], 2);       // 2단계까지 평탄화
+  _.fromPairs([['a', 1], ['b', 2]]);           // {a: 1, b: 2}
+  _.toPairs({a: 1, b: 2});                     // [['a', 1], ['b', 2]]
+  _.zip(['a','b'], [1,2], [true,false]);       // [['a',1,true], ['b',2,false]]
+  _.unzip([['a',1], ['b',2]]);                 // [['a','b'], [1,2]]
+  _.reverse([1,2,3]);                          // [3,2,1] (원본 수정 안함)
+
+  // 📊 정렬
+  _.sortBy(users, 'age');                       // age로 정렬
+  _.orderBy(users, ['age', 'name'], ['asc', 'desc']); // 다중 정렬
+
+  2️⃣ 컬렉션(Collection) 메서드
+
+  // 🔄 반복/변환
+  _.forEach(users, (user, index) => {
+      console.log(user.name);
+  });
+  _.forEachRight(users, user => {}); // 역순 반복
+
+  _.map(users, 'name');                         // ['김철수', '이영희', '박민수']
+  _.map(users, user => user.age * 2);           // 나이 * 2
+
+  // 🔍 필터링
+  _.filter(users, { active: true });            // active가 true인 것만
+  _.filter(users, user => user.age > 25);       // 25살 초과
+  _.reject(users, { active: false });           // active가 false가 아닌 것
+  _.partition(users, { active: true });         // [active true 배열, false 배열]
+
+  // 📊 그룹핑/집계
+  _.groupBy(users, 'age');                      // age별 그룹
+  _.countBy(users, 'active');                   // {true: 2, false: 1}
+  _.keyBy(users, 'id');                         // id를 key로 하는 객체
+
+  // 🔢 집계 함수
+  _.reduce(arr, (sum, n) => sum + n, 0);        // 합계
+  _.reduceRight(arr, (sum, n) => sum + n);      // 역순 reduce
+  _.size(users);                                 // 크기
+  _.sample(arr);                                 // 랜덤 1개
+  _.sampleSize(arr, 3);                          // 랜덤 3개
+  _.shuffle(arr);                                // 섞기
+
+  // ✅ 조건 체크
+  _.every(users, { active: true });             // 모두 active인지
+  _.some(users, { active: true });              // 하나라도 active인지
+  _.includes(arr, 3);                           // 3 포함 여부
+
+  3️⃣ 객체(Object) 메서드
+
+  const obj = { a: 1, b: 2, c: 3 };
+  const nested = { a: { b: { c: 3 } } };
+
+  // 🔑 키/값 작업
+  _.keys(obj);                                  // ['a', 'b', 'c']
+  _.values(obj);                                // [1, 2, 3]
+  _.entries(obj);                               // [['a',1], ['b',2], ['c',3]]
+  _.pick(obj, ['a', 'c']);                     // {a: 1, c: 3}
+  _.omit(obj, ['b']);                          // {a: 1, c: 3}
+  _.pickBy(obj, val => val > 1);               // {b: 2, c: 3}
+  _.omitBy(obj, val => val > 1);               // {a: 1}
+
+  // 🔄 변환
+  _.invert(obj);                                // {1: 'a', 2: 'b', 3: 'c'}
+  _.mapKeys(obj, (val, key) => key + '_new');  // 키 변환
+  _.mapValues(obj, val => val * 2);            // 값 변환
+  _.transform(obj, (result, val, key) => {     // 커스텀 변환
+      result[key] = val * 2;
+  }, {});
+
+  // 🔗 병합/복사
+  _.assign({}, obj, { d: 4 });                  // 얕은 복사
+  _.merge({}, nested, { a: { b: { d: 4 }}});   // 깊은 병합
+  _.defaults(obj, { d: 4 });                   // 기본값 설정
+  _.clone(obj);                                 // 얕은 복사
+  _.cloneDeep(nested);                         // 깊은 복사
+
+  // 📍 경로 접근
+  _.get(nested, 'a.b.c');                      // 3
+  _.get(nested, 'a.b.d', 'default');           // 'default' (없으면)
+  _.set(nested, 'a.b.d', 4);                   // 경로에 값 설정
+  _.has(nested, 'a.b.c');                      // true
+  _.unset(nested, 'a.b.c');                    // 경로 삭제
+
+  4️⃣ 함수(Function) 메서드
+
+  // ⏱️ 실행 제어
+  const debounced = _.debounce(() => {
+      console.log('디바운스!');
+  }, 300);                                      // 300ms 후 실행
+
+  const throttled = _.throttle(() => {
+      console.log('쓰로틀!');
+  }, 1000);                                     // 1초에 최대 1번
+
+  const onceFn = _.once(() => {
+      console.log('한번만!');
+  });                                           // 한 번만 실행
+
+  _.delay(() => console.log('지연'), 1000);    // 1초 후 실행
+  _.defer(() => console.log('다음 틱'));       // 다음 틱에 실행
+
+  // 🔧 함수 조작
+  _.curry(fn);                                  // 커링
+  _.partial(fn, arg1, _, arg3);                // 부분 적용
+  _.bind(fn, thisArg);                         // this 바인딩
+  _.memoize(expensiveFn);                      // 메모이제이션
+
+  5️⃣ 문자열(String) 메서드
+
+  const str = '  Hello World  ';
+
+  _.camelCase('hello-world');                  // 'helloWorld'
+  _.capitalize('hello');                       // 'Hello'
+  _.kebabCase('helloWorld');                   // 'hello-world'
+  _.snakeCase('helloWorld');                   // 'hello_world'
+  _.upperCase('hello');                        // 'HELLO'
+  _.lowerCase('HELLO');                        // 'hello'
+  _.upperFirst('hello');                       // 'Hello'
+  _.lowerFirst('Hello');                       // 'hello'
+
+  _.startsWith('hello', 'he');                 // true
+  _.endsWith('hello', 'lo');                   // true
+  _.repeat('*', 3);                           // '***'
+  _.pad('hi', 6);                             // '  hi  '
+  _.padStart('hi', 6, '0');                   // '0000hi'
+  _.padEnd('hi', 6, '!');                     // 'hi!!!!'
+  _.trim(str);                                 // 'Hello World'
+  _.trimStart(str);                           // 'Hello World  '
+  _.trimEnd(str);                             // '  Hello World'
+  _.truncate('hello world', { length: 5 });   // 'he...'
+  _.escape('<div>');                          // '&lt;div&gt;'
+  _.unescape('&lt;div&gt;');                  // '<div>'
+
+  6️⃣ 수학(Math) 메서드
+
+  _.add(6, 4);                                 // 10
+  _.subtract(6, 4);                           // 2
+  _.multiply(6, 4);                           // 24
+  _.divide(6, 4);                             // 1.5
+  _.sum([1, 2, 3]);                           // 6
+  _.sumBy(users, 'age');                      // age 합계
+  _.mean([1, 2, 3, 4]);                       // 2.5
+  _.meanBy(users, 'age');                     // age 평균
+  _.max([1, 2, 3]);                           // 3
+  _.maxBy(users, 'age');                      // 가장 나이 많은 user
+  _.min([1, 2, 3]);                           // 1
+  _.minBy(users, 'age');                      // 가장 나이 적은 user
+  _.round(4.006, 2);                          // 4.01
+  _.floor(4.9);                               // 4
+  _.ceil(4.1);                                // 5
+
+  7️⃣ 유틸리티(Utility) 메서드
+
+  // 타입 체크
+  _.isArray([]);                              // true
+  _.isObject({});                             // true
+  _.isString('');                             // true
+  _.isNumber(1);                              // true
+  _.isBoolean(true);                          // true
+  _.isFunction(() => {});                     // true
+  _.isNull(null);                             // true
+  _.isUndefined(undefined);                   // true
+  _.isNil(null);                              // true (null or undefined)
+  _.isEmpty([]);                              // true
+  _.isEqual(obj1, obj2);                      // 깊은 비교
+
+  // 타입 변환
+  _.toArray('abc');                           // ['a', 'b', 'c']
+  _.toNumber('3.2');                          // 3.2
+  _.toString(123);                            // '123'
+  _.toInteger(3.2);                           // 3
+  _.toPlainObject(obj);                       // 일반 객체로
+
+  8️⃣ 체이닝(Chaining)
+
+  // 체인 방식으로 여러 작업 연결
+  const result = _.chain(users)
+      .filter({ active: true })               // active만
+      .map('age')                             // age 추출
+      .sum()                                  // 합계
+      .value();                               // 결과 반환
+
+  // 복잡한 예제
+  const processed = _.chain(data)
+      .filter(item => item.value > 0)
+      .groupBy('category')
+      .mapValues(group => ({
+          count: group.length,
+          total: _.sumBy(group, 'value'),
+          average: _.meanBy(group, 'value')
+      }))
+      .pickBy(stats => stats.count > 5)
+      .orderBy(['total'], ['desc'])
+      .value();
+
+  9️⃣ 실전 활용 예시
+
+  // AG Grid 데이터 가공
+  const gridData = _.chain(rawData)
+      .filter(item => item.status === 'active')
+      .map((item, index) => ({
+          ...item,
+          id: index + 1,
+          displayName: _.startCase(item.name),
+          formattedDate: moment(item.date).format('YYYY-MM-DD')
+      }))
+      .orderBy(['priority', 'date'], ['desc', 'asc'])
+      .value();
+
+  // 중복 제거 + 정렬
+  const uniqueSorted = _.chain(data)
+      .uniqBy('id')
+      .sortBy('name')
+      .value();
+
+  // 그룹별 통계
+  const statistics = _.chain(sales)
+      .groupBy('region')
+      .mapValues(regionSales => ({
+          region: regionSales[0].region,
+          totalSales: _.sumBy(regionSales, 'amount'),
+          avgSales: _.meanBy(regionSales, 'amount'),
+          maxSale: _.maxBy(regionSales, 'amount'),
+          count: regionSales.length
+      }))
+      .values()
+      .orderBy('totalSales', 'desc')
+      .value();
